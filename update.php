@@ -32,7 +32,7 @@ function gen_password($length = 6)
 }
  
 
-
+$rund_pass = gen_password(8);
 
 error_reporting(E_ERROR | E_PARSE | E_CORE_ERROR);
  // Database connection details. 
@@ -90,12 +90,13 @@ $id = $_GET['id'];
             </div>  
             <div class="form-group">
                 <label>Password</label>
-                <input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo gen_password(8)?>">
+                <input type="password" name="password" class="password form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $rund_pass ?>">
                 <span class="invalid-feedback"><?php echo $password_err; ?></span>
+                <div class="passwordview" style="padding-top: 10px;"><input type="checkbox" ><span>Показать/скрыть пароль</span></div> 
             </div>
             <div class="form-group">
                 <label>Confirm Password</label>
-                <input type="password" name="confirm_password" class="form-control <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo gen_password(8) ?>">
+                <input type="password" name="confirm_password" class="password form-control <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $rund_pass ?>">
                 <span class="invalid-feedback"><?php echo $confirm_password_err; ?></span>
             </div>
             <div class="form-group">
@@ -107,3 +108,15 @@ $id = $_GET['id'];
         </form>
 
 </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+   <script>
+$('.passwordview input[type=checkbox]').on('change', function() {
+    var $el = $(this);
+    if ($el.is(':checked')) {
+    $('.password').attr('type', 'text');
+    } else {
+    $('.password').attr('type', 'password');
+    }
+    
+});
+ </script> 
