@@ -70,19 +70,24 @@ server with default setting (user 'root' with no password) */
 // $pdo = DB::getInstance();
 // //DB::setCharsetEncoding();
 // 
-define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'postgres');
-define('DB_PASSWORD', 'qweasdzxc');
-define('DB_NAME', 'test');
-define('P_PORT', '5432');
+// define('DB_SERVER', 'localhost');
+// define('DB_USERNAME', 'postgres');
+// define('DB_PASSWORD', 'qweasdzxc');
+// define('DB_NAME', 'test');
+// define('P_PORT', '5432');
 
 class DB {
+     const DB_SERVER = 'localhost';
+     const DB_USERNAME = 'postgres';
+     const DB_PASSWORD = 'qweasdzxc';
+     const DB_NAME = 'test';
+     const P_PORT = '5432';
    
 protected static $instance;
 protected function __construct() {
 if(empty(self::$instance)) {
         try {
-            self::$instance = new PDO("pgsql:host=" . DB_SERVER . ";port=" . P_PORT . ";dbname=" . DB_NAME, DB_USERNAME, DB_PASSWORD);
+            self::$instance = new PDO("pgsql:host=".self::DB_SERVER.";port=".self::P_PORT.";dbname=".self::DB_NAME, self::DB_USERNAME, self::DB_PASSWORD);
             self::$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT);
         } catch(PDOException $error) {
             echo $error->getMessage();
